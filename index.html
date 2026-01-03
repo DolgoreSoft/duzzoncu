@@ -146,13 +146,24 @@
 
     <script src="script.js"></script>
     <script>
-      // AdSense 광고 초기화 (스크립트 로드 후 실행)
+      // AdSense 광고 초기화 (페이지 로드 후 실행)
       window.addEventListener("load", function () {
-        try {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-          console.error("AdSense 초기화 오류:", e);
-        }
+        // 약간의 지연을 두어 DOM이 완전히 렌더링되도록 함
+        setTimeout(function () {
+          try {
+            var adElement = document.querySelector(".adsbygoogle");
+            if (adElement && adElement.offsetWidth > 0) {
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            } else {
+              // 광고 컨테이너가 보이지 않으면 다시 시도
+              setTimeout(function () {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              }, 100);
+            }
+          } catch (e) {
+            console.error("AdSense 초기화 오류:", e);
+          }
+        }, 100);
       });
     </script>
   </body>
