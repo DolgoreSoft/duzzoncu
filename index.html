@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>두바이 쫀득 쿠키 만들기 🍪</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <!-- 시작 화면 -->
+      <div id="start-screen" class="screen active">
+        <div class="start-content">
+          <h1>🍪 두바이 쫀득 쿠키 만들기</h1>
+          <p class="subtitle">
+            겉은 바삭, 속은 떡처럼 쫀득한 쿠키를 만들어보세요!
+          </p>
+          <button id="start-btn" class="btn-primary">시작하기</button>
+        </div>
+      </div>
+
+      <!-- 게임 화면 -->
+      <div id="game-screen" class="screen">
+        <div class="game-header">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <div class="step-indicator">
+            <span id="step-text">1단계: 버터 크림화</span>
+          </div>
+        </div>
+
+        <div class="game-content">
+          <!-- 작업 공간 -->
+          <div class="work-area">
+            <div class="bowl-container" id="bowl-container">
+              <img
+                src="images/bowl.png"
+                alt="볼"
+                class="bowl-img"
+                id="bowl-img"
+              />
+              <div class="ingredients-in-bowl" id="ingredients-in-bowl"></div>
+            </div>
+            <div
+              class="oven-container"
+              id="oven-container"
+              style="display: none"
+            >
+              <img src="images/oven.png" alt="오븐" class="oven-img" />
+              <div class="oven-pan-container">
+                <img
+                  src="images/oven_pan.png"
+                  alt="오븐팬"
+                  class="oven-pan-img"
+                />
+                <div class="cookies-on-pan" id="cookies-on-pan"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 재료 슬롯 -->
+          <div class="ingredients-shelf" id="ingredients-shelf">
+            <!-- 재료들이 동적으로 추가됨 -->
+          </div>
+
+          <!-- 토핑 선택 영역 (5단계) -->
+          <div
+            class="topping-selection"
+            id="topping-selection"
+            style="display: none"
+          >
+            <h3>토핑을 선택해주세요</h3>
+            <div class="topping-options">
+              <div class="topping-option" data-topping="chocochip">
+                <img src="images/chocolate_chip.png" alt="초코칩" />
+                <span>초코칩</span>
+              </div>
+              <div class="topping-option" data-topping="darkchocolate">
+                <img src="images/dark_chocolate.png" alt="다크초콜릿" />
+                <span>다크초콜릿</span>
+              </div>
+              <div class="topping-option" data-topping="macadamia">
+                <img src="images/macadamia.png" alt="마카다미아" />
+                <span>마카다미아</span>
+              </div>
+              <div class="topping-option" data-topping="pikan">
+                <img src="images/pikan.png" alt="피칸" />
+                <span>피칸</span>
+              </div>
+              <div class="topping-option" data-topping="pistaccio">
+                <img src="images/pistaccio.png" alt="피스타치오" />
+                <span>피스타치오</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 도구 슬롯 -->
+          <div class="tools-shelf" id="tools-shelf">
+            <!-- 도구들이 동적으로 추가됨 -->
+          </div>
+
+          <!-- 다음 단계 버튼 -->
+          <button id="next-step-btn" class="btn-primary" style="display: none">
+            다음 단계
+          </button>
+        </div>
+      </div>
+
+      <!-- 결과 화면 -->
+      <div id="result-screen" class="screen">
+        <div class="result-content">
+          <h2>완성! 🎉</h2>
+          <div class="result-cookie-container">
+            <img id="result-cookie-img" src="" alt="완성된 쿠키" />
+          </div>
+          <p class="result-message" id="result-message">
+            두바이 쫀득 쿠키가 완성되었어요!
+          </p>
+          <div class="result-actions">
+            <button id="share-btn" class="btn-primary">이미지 공유하기</button>
+            <button id="restart-btn" class="btn-secondary">다시 만들기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="share-canvas" style="display: none"></canvas>
+
+    <script src="script.js"></script>
+  </body>
+</html>
