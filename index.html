@@ -151,31 +151,42 @@
 
     <script src="script.js"></script>
     <script>
-      // AdSense 광고 초기화 (페이지 로드 후 실행)
-      window.addEventListener("load", function () {
-        // requestAnimationFrame을 사용하여 DOM이 완전히 렌더링된 후 초기화
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
+      // AdSense 광고 초기화
+      (function () {
+        var adElement = document.querySelector(".adsbygoogle");
+        if (!adElement) return;
+
+        function initAd() {
+          var container = adElement.parentElement;
+          var startScreen = document.getElementById("start-screen");
+
+          // 시작 화면이 표시되고 컨테이너에 너비가 있는지 확인
+          if (
+            startScreen &&
+            startScreen.classList.contains("active") &&
+            container &&
+            container.offsetWidth > 0
+          ) {
             try {
-              var adElement = document.querySelector(".adsbygoogle");
-              if (adElement) {
-                // 컨테이너의 부모 요소가 표시되어 있는지 확인
-                var container = adElement.parentElement;
-                if (container && container.offsetWidth > 0) {
-                  (adsbygoogle = window.adsbygoogle || []).push({});
-                } else {
-                  // 추가 지연 후 재시도
-                  setTimeout(function () {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                  }, 500);
-                }
-              }
+              (adsbygoogle = window.adsbygoogle || []).push({});
             } catch (e) {
               console.error("AdSense 초기화 오류:", e);
             }
+          } else {
+            // 재시도
+            setTimeout(initAd, 200);
+          }
+        }
+
+        // 페이지 로드 후 초기화
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(initAd, 500);
           });
-        });
-      });
+        } else {
+          setTimeout(initAd, 500);
+        }
+      })();
     </script>
   </body>
 </html>
